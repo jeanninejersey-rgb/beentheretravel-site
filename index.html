@@ -434,6 +434,13 @@
 (function(){
   var ENDPOINT = "https://formsubmit.co/ajax/teambeentheresupport@gmail.com";
   var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var cameFrom = "direct";
+  try {
+    var q = new URLSearchParams(window.location.search);
+    var parts = ["utm_source","utm_medium","utm_campaign"].map(function(k){ return (q.get(k) || "").slice(0,40).replace(/[^\w\-. ]/g,""); }).filter(Boolean);
+    if(parts.length){ cameFrom = parts.join(" / "); sessionStorage.setItem("bt_from", cameFrom); }
+    else { cameFrom = sessionStorage.getItem("bt_from") || "direct"; }
+  } catch(err) {}
   document.querySelectorAll("form[data-wl]").forEach(function(form){
     var msg = form.parentNode.querySelector(".msg");
     form.addEventListener("submit", function(e){
@@ -453,7 +460,8 @@
           _captcha: "false",
           source: "beentheretravel.app",
           device: form.device.value || "not given",
-          heard_from: form.heard_from.value || "not given"
+          heard_from: form.heard_from.value || "not given",
+          came_from: cameFrom
         })
       }).then(function(r){ return r.json(); }).then(function(d){
         if(d && (d.success === "true" || d.success === true)){
