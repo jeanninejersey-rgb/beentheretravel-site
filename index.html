@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeenThere | Every place has a story</title>
+<meta name="description" content="BeenThere is a travel memory app. Pin the places you have been, save your story and photos, and watch your personal atlas grow. Join the waitlist.">
+<meta property="og:title" content="BeenThere | Every place has a story">
+<meta property="og:description" content="Your travels, your memories, your next adventure. Join the waitlist.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://beentheretravel.app/">
+<meta name="theme-color" content="#0f2a22">
+<link rel="canonical" href="https://beentheretravel.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2a22'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23d9b877' stroke-width='3'/%3E%3Cpath d='M32 20l5 12-5 12-5-12z' fill='%23d9b877'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0f2a22; --forest-2:#16382d; --forest-3:#1f4a3b;
+    --gold:#d9b877; --gold-deep:#b8964f; --cream:#f6f0e1; --cream-2:#ece3cd;
+    --ink:#10201a; --muted:#6b756f;
+    --serif:'Instrument Serif', Georgia, 'Times New Roman', serif;
+    --sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .logo{font-family:var(--serif);font-size:30px;letter-spacing:-.5px;color:var(--cream);text-decoration:none}
+  .logo i{color:var(--gold)}
+  .btn{display:inline-block;background:var(--gold);color:var(--forest);font-weight:600;font-size:16px;padding:14px 28px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;transition:background .2s,transform .2s}
+  .btn:hover{background:#e6c88c;transform:translateY(-1px)}
+  .btn:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  header.top{position:absolute;inset:0 0 auto 0;z-index:5;padding:22px 0}
+  header.top .wrap{display:flex;justify-content:space-between;align-items:center}
+  header.top a.nav{color:var(--cream);text-decoration:none;font-size:15px;font-weight:500;border:1px solid rgba(217,184,119,.55);padding:9px 18px;border-radius:999px}
+  header.top a.nav:hover{background:rgba(217,184,119,.15)}
+
+  .hero{background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(217,184,119,.18), transparent 60%),
+      linear-gradient(180deg,var(--forest) 0%,var(--forest-2) 100%);
+    color:var(--cream);padding:150px 0 110px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;opacity:.07;pointer-events:none;
+    background-image:repeating-linear-gradient(135deg,var(--cream) 0 1px,transparent 1px 9px)}
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.4vw,76px);line-height:1.02;letter-spacing:-1px}
+  h1 em{color:var(--gold)}
+  .hero p.lead{font-size:19px;color:#dfe6dc;max-width:520px;margin:22px 0 32px}
+  .note{font-size:13.5px;color:#aebdb3;margin-top:14px}
+
+  /* waitlist form */
+  form.wl{display:flex;gap:10px;flex-wrap:wrap;max-width:520px}
+  form.wl input[type=email]{flex:1 1 240px;min-width:0;padding:14px 20px;border-radius:999px;border:1px solid rgba(217,184,119,.5);background:rgba(255,255,255,.08);color:var(--cream);font-size:16px;font-family:inherit}
+  form.wl input::placeholder{color:#a9b8ad}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+  .msg{margin-top:14px;font-size:15px;min-height:22px}
+  .msg.ok{color:var(--gold)} .msg.err{color:#f1b4a8}
+
+  /* css-drawn map card (no personal data) */
+  .card{background:var(--forest-3);border:1px solid rgba(217,184,119,.35);border-radius:28px;padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+  .map{position:relative;height:260px;border-radius:18px;overflow:hidden;background:
+      radial-gradient(circle at 30% 40%,#2c5a49 0 18%,transparent 19%),
+      radial-gradient(circle at 62% 58%,#2c5a49 0 22%,transparent 23%),
+      radial-gradient(circle at 78% 28%,#2c5a49 0 12%,transparent 13%),
+      #123629}
+  .pin{position:absolute;width:18px;height:18px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid var(--cream)}
+  .pin.g{background:#1f9d7a}.pin.o{background:var(--gold)}
+  .chips{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+  .chip{font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(246,240,225,.1);color:var(--cream)}
+  .chip b{color:var(--gold);font-weight:600}
+  .card h3{font-family:var(--serif);font-weight:400;font-size:26px;color:var(--cream);margin-top:18px}
+  .card p{font-size:14px;color:#b9c7bd}
+
+  section{padding:96px 0}
+  .kicker{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:12px}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,52px);line-height:1.08;letter-spacing:-.5px;max-width:680px}
+  .sub{font-size:18px;color:var(--muted);max-width:620px;margin-top:16px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .feat{background:#fffaf0;border:1px solid var(--cream-2);border-radius:22px;padding:28px}
+  .feat .ic{width:44px;height:44px;border-radius:12px;background:var(--forest);color:var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:22px;margin-bottom:16px}
+  .feat h3{font-family:var(--serif);font-weight:400;font-size:25px;margin-bottom:6px}
+  .feat p{color:var(--muted);font-size:15.5px}
+
+  .dark{background:var(--forest);color:var(--cream)}
+  .dark .sub{color:#b9c7bd} .dark .kicker{color:var(--gold)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+  .step .n{font-family:var(--serif);font-size:56px;color:var(--gold);line-height:1}
+  .step h3{font-family:var(--serif);font-weight:400;font-size:26px;margin:8px 0 6px}
+  .step p{color:#b9c7bd;font-size:15.5px}
+
+  .cta{text-align:center;background:linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%)}
+  .cta h2{margin:0 auto}
+  .cta .sub{margin:16px auto 32px}
+  .cta form.wl{margin:0 auto;justify-content:center}
+  .cta form.wl input[type=email]{background:#fff;color:var(--ink);border-color:var(--gold-deep)}
+  .cta form.wl input::placeholder{color:#8a948e}
+  .cta .msg.ok{color:var(--forest-3);font-weight:500}
+  .cta .msg.err{color:#a63d2a}
+  .cta .note{color:var(--muted)}
+
+  footer{background:var(--forest);color:#b9c7bd;padding:40px 0;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--gold)}
+
+  @media (max-width:860px){
+    .hero{padding:120px 0 80px}
+    .hero .wrap{grid-template-columns:1fr;gap:40px}
+    .grid,.steps{grid-template-columns:1fr}
+    section{padding:72px 0}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">Been<i>There</i></a>
+    <a class="nav" href="#join">Join the waitlist</a>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">A travel memory app</div>
+      <h1>Every place<br>has a <em>story.</em></h1>
+      <p class="lead">Your travels, your memories, your next adventure. Pin the places you have been, save the story and the photos, and watch your personal atlas grow.</p>
+      <form class="wl" data-wl novalidate>
+        <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required autocomplete="email">
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" type="submit">Join the waitlist</button>
+      </form>
+      <div class="msg" role="status" aria-live="polite"></div>
+      <p class="note">Be first to know when BeenThere launches. No spam, and you can opt out anytime.</p>
+    </div>
+
+    <div class="card" aria-hidden="true">
+      <div class="map">
+        <span class="pin g" style="left:26%;top:38%"></span>
+        <span class="pin g" style="left:58%;top:60%"></span>
+        <span class="pin o" style="left:74%;top:26%"></span>
+        <span class="pin g" style="left:40%;top:70%"></span>
+      </div>
+      <div class="chips">
+        <span class="chip"><b>Been</b> 4</span>
+        <span class="chip"><b>Bucket List</b> 1</span>
+        <span class="chip">2 countries</span>
+      </div>
+      <h3>My Travel Passport</h3>
+      <p>A lifetime of discoveries.</p>
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="kicker">What you can do</div>
+    <h2>A personal atlas of everywhere life has taken you.</h2>
+    <p class="sub">Not just a list of pins. BeenThere keeps the moment, the people and the date, so a place becomes a memory you can revisit.</p>
+    <div class="grid">
+      <div class="feat"><div class="ic">1</div><h3>Your travel map</h3><p>Pin places you have been and the places you dream of going. Keep Been and Bucket List side by side.</p></div>
+      <div class="feat"><div class="ic">2</div><h3>Memories with a story</h3><p>Add the date, who you were with, a few words and your photos. Search them any time.</p></div>
+      <div class="feat"><div class="ic">3</div><h3>Travel Passport</h3><p>Collect passport stamps and adventure awards as your footprint grows across countries, states and cities.</p></div>
+      <div class="feat"><div class="ic">4</div><h3>Your Year in Travel</h3><p>Every year is a chapter. Look back at where life took you.</p></div>
+      <div class="feat"><div class="ic">5</div><h3>Travel Replay</h3><p>Watch your journeys play out in order on the map, and create a shareable video.</p></div>
+      <div class="feat"><div class="ic">6</div><h3>Life Chapters</h3><p>Group places into stories like Family Vacations, College Years or Our Honeymoon.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <div class="kicker">How it works</div>
+    <h2>From a trip to a keepsake in three steps.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Pin a place</h3><p>Search for somewhere you have been, or tap the map.</p></div>
+      <div class="step"><div class="n">2</div><h3>Save the memory</h3><p>Add the date, your story and the photos that make it yours.</p></div>
+      <div class="step"><div class="n">3</div><h3>Watch it grow</h3><p>Your passport, stamps and yearly recap build themselves as you add places.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="join">
+  <div class="wrap">
+    <div class="kicker">Coming soon</div>
+    <h2>Be the first to carry your travels with you.</h2>
+    <p class="sub">Join the waitlist and we will email you when BeenThere is ready.</p>
+    <form class="wl" data-wl novalidate>
+      <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required autocomplete="email">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <div class="msg" role="status" aria-live="polite"></div>
+    <p class="note">We only use your email to tell you about the BeenThere launch.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><span class="logo" style="font-size:22px">Been<i>There</i></span> &nbsp; Every place has a story.</div>
+    <div>Questions? <a href="mailto:teambeentheresupport@gmail.com">teambeentheresupport@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ENDPOINT = "https://formsubmit.co/ajax/teambeentheresupport@gmail.com";
+  var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  document.querySelectorAll("form[data-wl]").forEach(function(form){
+    var msg = form.parentNode.querySelector(".msg");
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var email = form.email.value.trim();
+      msg.className = "msg";
+      if(!re.test(email)){ msg.className = "msg err"; msg.textContent = "Please enter a valid email address."; return; }
+      if(form._honey.value){ return; }
+      var btn = form.querySelector("button"); btn.disabled = true;
+      fetch(ENDPOINT, {
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body: JSON.stringify({
+          email: email,
+          _subject: "New BeenThere waitlist signup",
+          _template: "table",
+          _captcha: "false",
+          source: "beentheretravel.app"
+        })
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if(d && (d.success === "true" || d.success === true)){
+          msg.className = "msg ok"; msg.textContent = "You're on the list. We'll be in touch when BeenThere launches.";
+          form.reset();
+        } else { throw new Error("fail"); }
+      }).catch(function(){
+        msg.className = "msg err";
+        msg.textContent = "Something went wrong. Please try again, or email teambeentheresupport@gmail.com.";
+      }).then(function(){ btn.disabled = false; });
+    });
+  });
+})();
+</script>
+</body>
+</html>
