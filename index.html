@@ -107,10 +107,30 @@
   footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
   footer a{color:var(--gold)}
 
+
+  .tag{display:inline-block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--gold-deep);border:1px solid var(--gold-deep);border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:middle;font-family:var(--sans)}
+  .plans{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:48px;align-items:stretch}
+  .plan{border-radius:26px;padding:32px;display:flex;flex-direction:column}
+  .plan.basic{background:#fffaf0;border:1px solid var(--cream-2)}
+  .plan.prem{background:linear-gradient(160deg,var(--forest-2),var(--forest));color:var(--cream);border:1px solid rgba(217,184,119,.55)}
+  .plan .lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+  .plan.prem .lbl{color:var(--gold)}
+  .plan h3{font-family:var(--serif);font-weight:400;font-size:34px;margin:6px 0 4px}
+  .plan .price{font-family:var(--serif);font-size:30px;color:var(--forest-3);margin:10px 0 2px}
+  .plan.prem .price{color:var(--gold)}
+  .plan .price small{font-family:var(--sans);font-size:14px;color:inherit;opacity:.8}
+  .plan .fine{font-size:13px;opacity:.8;margin-bottom:14px}
+  .plan ul{list-style:none;margin-top:14px}
+  .plan li{padding:9px 0 9px 28px;position:relative;font-size:15.5px;border-top:1px solid rgba(128,128,128,.18)}
+  .plan li::before{content:"\2713";position:absolute;left:0;top:9px;color:var(--gold-deep);font-weight:700}
+  .plan.prem li::before{color:var(--gold)}
+  .plan.prem li{border-top-color:rgba(246,240,225,.15)}
+  .plans-note{margin-top:22px;font-size:14px;color:var(--muted);max-width:720px}
+
   @media (max-width:860px){
     .hero{padding:120px 0 80px}
     .hero .wrap{grid-template-columns:1fr;gap:40px}
-    .grid,.steps{grid-template-columns:1fr}
+    .grid,.steps,.plans{grid-template-columns:1fr}
     section{padding:72px 0}
   }
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
@@ -168,9 +188,9 @@
       <div class="feat"><div class="ic">1</div><h3>Your travel map</h3><p>Pin places you have been and the places you dream of going. Keep Been and Bucket List side by side.</p></div>
       <div class="feat"><div class="ic">2</div><h3>Memories with a story</h3><p>Add the date, who you were with, a few words and your photos. Search them any time.</p></div>
       <div class="feat"><div class="ic">3</div><h3>Travel Passport</h3><p>Collect passport stamps and adventure awards as your footprint grows across countries, states and cities.</p></div>
-      <div class="feat"><div class="ic">4</div><h3>Your Year in Travel</h3><p>Every year is a chapter. Look back at where life took you.</p></div>
-      <div class="feat"><div class="ic">5</div><h3>Travel Replay</h3><p>Watch your journeys play out in order on the map, and create a shareable video.</p></div>
-      <div class="feat"><div class="ic">6</div><h3>Life Chapters</h3><p>Group places into stories like Family Vacations, College Years or Our Honeymoon.</p></div>
+      <div class="feat"><div class="ic">4</div><h3>Your Year in Travel<span class="tag">Premium</span></h3><p>Every year is a chapter. Look back at where life took you.</p></div>
+      <div class="feat"><div class="ic">5</div><h3>Travel Replay<span class="tag">Premium</span></h3><p>Watch your journeys play out in order on the map, and create a shareable video.</p></div>
+      <div class="feat"><div class="ic">6</div><h3>Life Chapters<span class="tag">Premium</span></h3><p>Group places into stories like Family Vacations, College Years or Our Honeymoon.</p></div>
     </div>
   </div>
 </section>
@@ -184,6 +204,43 @@
       <div class="step"><div class="n">2</div><h3>Save the memory</h3><p>Add the date, your story and the photos that make it yours.</p></div>
       <div class="step"><div class="n">3</div><h3>Watch it grow</h3><p>Your passport, stamps and yearly recap build themselves as you add places.</p></div>
     </div>
+  </div>
+</section>
+
+<section id="plans">
+  <div class="wrap">
+    <div class="kicker">Basic and Premium</div>
+    <h2>Start free. Go deeper when you are ready.</h2>
+    <p class="sub">Everything you save stays yours, in Basic and in Premium.</p>
+    <div class="plans">
+      <article class="plan basic">
+        <div class="lbl">Basic</div>
+        <h3>Free, forever</h3>
+        <div class="price">$0</div>
+        <div class="fine">Your travel journal, ready to use.</div>
+        <ul>
+          <li>Interactive map with every place you save</li>
+          <li>Visited places and Bucket List dreams</li>
+          <li>Travel memories with photos, notes and companions</li>
+          <li>On This Day and the Memory Time Machine</li>
+          <li>Travel Passport, stamps, state flags and backups</li>
+        </ul>
+      </article>
+      <article class="plan prem">
+        <div class="lbl">Premium &middot; planned pricing</div>
+        <h3>Look back deeper</h3>
+        <div class="price">$2.99 <small>/ month</small> &nbsp;<small>or</small>&nbsp; $24.99 <small>/ year</small></div>
+        <div class="fine">Planned US pricing, about 30% less on the yearly plan. A 7-day free trial is planned, subject to App Store eligibility. Pricing may change before launch.</div>
+        <ul>
+          <li>Your Year in Travel <span class="tag">Beta</span></li>
+          <li>Trip Collections <span class="tag">Beta</span></li>
+          <li>World Explorer insights <span class="tag">Beta</span></li>
+          <li>Travel Replay with shareable video</li>
+          <li>Life Chapters</li>
+        </ul>
+      </article>
+    </div>
+    <p class="plans-note">Premium subscriptions are not available yet. They will be offered through the BeenThere iPhone app, and the App Store will show the final price in your local currency before you confirm.</p>
   </div>
 </section>
 
@@ -206,7 +263,7 @@
 <footer>
   <div class="wrap">
     <div><span class="logo" style="font-size:22px">Been<i>There</i></span> &nbsp; Every place has a story.</div>
-    <div>Questions? <a href="mailto:info@beentheretravel.app">info@beentheretravel.app</a></div>
+    <div>Questions? <a href="mailto:info@beentheretravel.app">info@beentheretravel.app</a> &nbsp;&middot;&nbsp; <a href="https://beenthere-travel.base44.app/privacy">Privacy Policy</a></div>
   </div>
 </footer>
 
