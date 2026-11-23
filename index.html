@@ -57,6 +57,10 @@
   form.wl{display:flex;gap:10px;flex-wrap:wrap;max-width:520px}
   form.wl input[type=email]{flex:1 1 240px;min-width:0;padding:14px 20px;border-radius:999px;border:1px solid rgba(217,184,119,.5);background:rgba(255,255,255,.08);color:var(--cream);font-size:16px;font-family:inherit}
   form.wl input::placeholder{color:#a9b8ad}
+  form.wl .opt{flex:0 0 100%;display:flex;gap:10px;flex-wrap:wrap}
+  form.wl select{flex:1 1 200px;min-width:0;padding:11px 38px 11px 16px;border-radius:999px;border:1px solid rgba(217,184,119,.35);background-color:rgba(255,255,255,.06);color:#c9d6cc;font-size:14px;font-family:inherit;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23d9b877' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+  form.wl select option{color:#1a1a1a;background:#fff}
+  .cta form.wl select{background-color:#fff;color:#55615a;border-color:var(--gold-deep)}
   .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
   .msg{margin-top:14px;font-size:15px;min-height:22px}
   .msg.ok{color:var(--gold)} .msg.err{color:#f1b4a8}
@@ -240,6 +244,10 @@
         <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required autocomplete="email">
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn" type="submit">Join the waitlist</button>
+        <div class="opt">
+          <select name="device" aria-label="Which phone do you use? (optional)"><option value="" selected>Your phone (optional)</option><option>iPhone</option><option>Android</option><option>Both</option><option>Other</option></select>
+          <select name="heard_from" aria-label="How did you hear about us? (optional)"><option value="" selected>How you found us (optional)</option><option>Friend or family</option><option>Social media</option><option>Search</option><option>News or a blog</option><option>Other</option></select>
+        </div>
       </form>
       <div class="msg" role="status" aria-live="polite"></div>
       <p class="note">Be first to know when BeenThere launches. No spam, and you can opt out anytime.</p>
@@ -404,6 +412,10 @@
       <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required autocomplete="email">
       <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn" type="submit">Join the waitlist</button>
+      <div class="opt">
+        <select name="device" aria-label="Which phone do you use? (optional)"><option value="" selected>Your phone (optional)</option><option>iPhone</option><option>Android</option><option>Both</option><option>Other</option></select>
+        <select name="heard_from" aria-label="How did you hear about us? (optional)"><option value="" selected>How you found us (optional)</option><option>Friend or family</option><option>Social media</option><option>Search</option><option>News or a blog</option><option>Other</option></select>
+      </div>
     </form>
     <div class="msg" role="status" aria-live="polite"></div>
     <p class="note">We only use your email to tell you about the BeenThere launch.</p>
@@ -439,7 +451,9 @@
           _subject: "New BeenThere waitlist signup",
           _template: "table",
           _captcha: "false",
-          source: "beentheretravel.app"
+          source: "beentheretravel.app",
+          device: form.device.value || "not given",
+          heard_from: form.heard_from.value || "not given"
         })
       }).then(function(r){ return r.json(); }).then(function(d){
         if(d && (d.success === "true" || d.success === true)){
