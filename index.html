@@ -187,6 +187,26 @@
   .chap:nth-child(2){border-left-color:#1f9d7a}.chap:nth-child(3){border-left-color:#e08f7a}
   .chap b{font-family:var(--serif);font-weight:400;font-size:21px;display:block}
 
+  .how{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:40px}
+  .how .steps{grid-template-columns:1fr;gap:30px;margin-top:0}
+  .how .step{display:grid;grid-template-columns:64px 1fr;column-gap:18px}
+  .how .step .n{grid-row:1/3}
+  .how .step h3{margin-top:4px}
+  .hv{position:relative;aspect-ratio:1/1;max-width:460px;width:100%;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,var(--forest-3),var(--forest-2));border:1px solid rgba(217,184,119,.4);box-shadow:0 26px 50px rgba(0,0,0,.35);overflow:hidden}
+  .hv svg.land{position:absolute;inset:0;width:100%;height:100%}
+  .hv .pin{position:absolute;left:46%;top:36%;width:34px;height:44px;margin:-44px 0 0 -17px;animation:drop 9s infinite}
+  .hv .ring{position:absolute;left:46%;top:36%;width:60px;height:22px;margin:-11px 0 0 -30px;border:2px solid var(--gold);border-radius:50%;opacity:0;animation:ringp 9s infinite}
+  .hv .chip{position:absolute;left:8%;right:8%;bottom:9%;background:var(--cream);color:var(--forest);border-radius:18px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 14px 30px rgba(0,0,0,.35);animation:rise 9s infinite}
+  .hv .chip .ph2{width:46px;height:46px;border-radius:10px;flex:none;background:linear-gradient(180deg,#3a2f5a,#e08f7a 60%,#f3c27c)}
+  .hv .chip b{color:var(--forest);font-family:var(--serif);font-weight:400;font-size:20px;display:block;line-height:1.15}
+  .hv .chip small{color:#5d6b63;font-size:12.5px}
+  .hv .stampbig{position:absolute;right:8%;top:8%;width:92px;height:92px;border-radius:50%;border:2px dashed var(--gold);display:grid;place-items:center;text-align:center;color:var(--gold);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;transform:rotate(-10deg);animation:stampin 9s infinite}
+  .hv .stampbig span{font-family:var(--serif);font-size:19px;letter-spacing:0;text-transform:none;color:var(--cream);display:block}
+  @keyframes drop{0%,4%{opacity:0;transform:translateY(-40px)}10%{opacity:1;transform:translateY(0)}92%{opacity:1}100%{opacity:0}}
+  @keyframes ringp{0%,9%{opacity:0;transform:scale(.4)}14%{opacity:.9}26%{opacity:0;transform:scale(1.5)}100%{opacity:0}}
+  @keyframes rise{0%,28%{opacity:0;transform:translateY(24px)}36%{opacity:1;transform:none}92%{opacity:1}100%{opacity:0}}
+  @keyframes stampin{0%,56%{opacity:0;transform:rotate(-10deg) scale(1.9)}62%{opacity:1;transform:rotate(-10deg) scale(1)}92%{opacity:1}100%{opacity:0}}
+
   @media (max-width:860px){
     .hero{padding:120px 0 80px}
     .hero .wrap{grid-template-columns:1fr;gap:40px}
@@ -194,9 +214,10 @@
     .frow{grid-template-columns:1fr;gap:28px;padding:34px 0}
     .frow:nth-of-type(even) .ftext{order:0}
     header.top .links a.l{display:none}
+    .how{grid-template-columns:1fr;gap:36px}
     section{padding:72px 0}
   }
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.pulse{animation:none;opacity:0}.scroll-cue svg{animation:none}.js .reveal{opacity:1;transform:none;transition:none}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.pulse{animation:none;opacity:0}.scroll-cue svg{animation:none}.hv .pin,.hv .chip,.hv .stampbig{animation:none;opacity:1}.hv .ring{animation:none}.js .reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -318,10 +339,19 @@
   <div class="wrap">
     <div class="kicker">How it works</div>
     <h2>From a trip to a keepsake in three steps.</h2>
-    <div class="steps">
-      <div class="step"><div class="n">1</div><h3>Pin a place</h3><p>Search for somewhere you have been, or tap the map.</p></div>
-      <div class="step"><div class="n">2</div><h3>Save the memory</h3><p>Add the date, your story and the photos that make it yours.</p></div>
-      <div class="step"><div class="n">3</div><h3>Watch it grow</h3><p>Your passport, stamps and yearly recap build themselves as you add places.</p></div>
+    <div class="how">
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Pin a place</h3><p>Search for somewhere you have been, or tap the map.</p></div>
+        <div class="step"><div class="n">2</div><h3>Save the memory</h3><p>Add the date, your story and the photos that make it yours.</p></div>
+        <div class="step"><div class="n">3</div><h3>Watch it grow</h3><p>Your passport, stamps and yearly recap build themselves as you add places.</p></div>
+      </div>
+      <div class="hv" aria-hidden="true">
+        <svg class="land" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice"><g fill="#2c5a49" opacity=".85"><path d="M30 90c30-30 90-40 130-20s30 60-10 80-100 20-120-10-10-34 0-50z"/><path d="M190 150c40-34 110-40 150-6s30 80-20 98-120 10-150-26-8-50 20-66z"/><path d="M60 250c24-16 64-14 80 6s-6 44-40 48-62-18-60-34 8-14 20-20z"/></g><path d="M184 144C150 190 120 170 90 230" fill="none" stroke="#d9b877" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round" opacity=".6"/></svg>
+        <div class="ring"></div>
+        <svg class="pin" viewBox="0 0 34 44"><path d="M17 43C17 43 3 27 3 17a14 14 0 0 1 28 0c0 10-14 26-14 26z" fill="#1f9d7a" stroke="#f6f0e1" stroke-width="3"/><circle cx="17" cy="17" r="5.5" fill="#f6f0e1"/></svg>
+        <div class="stampbig"><div><span>Portugal</span>2026</div></div>
+        <div class="chip"><div class="ph2"></div><div><b>Sunset on the harbor</b><small>Lisbon &middot; June 14, 2026</small></div></div>
+      </div>
     </div>
   </div>
 </section>
