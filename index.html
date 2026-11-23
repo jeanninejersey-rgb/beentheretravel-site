@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js';</script>
 <style>
   :root{
     --forest:#0f2a22; --forest-2:#16382d; --forest-3:#1f4a3b;
@@ -42,10 +43,10 @@
   .hero{background:
       radial-gradient(1200px 500px at 80% -10%, rgba(217,184,119,.18), transparent 60%),
       linear-gradient(180deg,var(--forest) 0%,var(--forest-2) 100%);
-    color:var(--cream);padding:150px 0 110px;position:relative;overflow:hidden}
+    color:var(--cream);padding:140px 0 36px;position:relative;overflow:hidden;min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center}
   .hero::after{content:"";position:absolute;inset:0;opacity:.07;pointer-events:none;
     background-image:repeating-linear-gradient(135deg,var(--cream) 0 1px,transparent 1px 9px)}
-  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .hero .wrap{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
   .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
   h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.4vw,76px);line-height:1.02;letter-spacing:-1px}
   h1 em{color:var(--gold)}
@@ -77,11 +78,6 @@
   h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,52px);line-height:1.08;letter-spacing:-.5px;max-width:680px}
   .sub{font-size:18px;color:var(--muted);max-width:620px;margin-top:16px}
 
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
-  .feat{background:#fffaf0;border:1px solid var(--cream-2);border-radius:22px;padding:28px}
-  .feat .ic{width:44px;height:44px;border-radius:12px;background:var(--forest);color:var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:22px;margin-bottom:16px}
-  .feat h3{font-family:var(--serif);font-weight:400;font-size:25px;margin-bottom:6px}
-  .feat p{color:var(--muted);font-size:15.5px}
 
   .dark{background:var(--forest);color:var(--cream)}
   .dark .sub{color:#b9c7bd} .dark .kicker{color:var(--gold)}
@@ -124,13 +120,83 @@
   .plan.prem li{border-top-color:rgba(246,240,225,.15)}
   .plans-note{margin-top:22px;font-size:14px;color:var(--muted);max-width:720px}
 
+  header.top .links{display:flex;gap:26px;align-items:center}
+  header.top .links a.l{color:var(--cream);text-decoration:none;font-size:15px;font-weight:500;opacity:.85}
+  header.top .links a.l:hover{opacity:1;color:var(--gold)}
+  .scroll-cue{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;margin:48px auto 0;color:var(--gold);text-decoration:none;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;transition:opacity .4s}
+  .scroll-cue.gone{opacity:0;pointer-events:none}
+  .scroll-cue svg{width:26px;height:26px;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+  /* reveal on scroll */
+  .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .js .reveal.in{opacity:1;transform:none}
+
+  /* feature rows */
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:44px 0}
+  .frow + .frow{border-top:1px solid var(--cream-2)}
+  .frow:nth-of-type(even) .ftext{order:2}
+  .frow .num{font-family:var(--serif);font-size:15px;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:10px}
+  .frow h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,42px);line-height:1.1;letter-spacing:-.4px;margin-bottom:12px}
+  .frow p{font-size:17px;color:var(--muted);max-width:440px}
+  .fvis{display:flex;justify-content:center}
+
+  /* mock app screens (demo content only) */
+  .ph{width:100%;max-width:380px;background:linear-gradient(170deg,var(--forest-2),var(--forest));border:1px solid rgba(217,184,119,.4);border-radius:28px;padding:20px;color:var(--cream);box-shadow:0 26px 50px rgba(15,42,34,.28);line-height:1.4}
+  .ph small{color:#a9bdb2;font-size:12.5px}
+  .seg{display:flex;background:rgba(246,240,225,.08);border-radius:999px;padding:4px;margin-bottom:14px}
+  .seg span{flex:1;text-align:center;font-size:13.5px;padding:8px 0;border-radius:999px;color:#b9c7bd}
+  .seg span.on{background:var(--gold);color:var(--forest);font-weight:600}
+  .prow{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:rgba(246,240,225,.06);margin-bottom:8px}
+  .prow .d{width:12px;height:12px;border-radius:50%;flex:none;border:2px solid var(--cream)}
+  .prow .d.g{background:#1f9d7a}.prow .d.o{background:var(--gold)}
+  .prow b{font-weight:600;font-size:15px;display:block}
+  .quick{margin-top:6px;display:inline-block;background:var(--gold);color:var(--forest);font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px}
+
+  .mem svg{display:block;width:100%;height:auto;border-radius:16px}
+  .mem .dt{color:var(--gold);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;margin-top:14px;font-weight:600}
+  .mem h4{font-family:var(--serif);font-weight:400;font-size:26px;margin:2px 0}
+  .mem p{font-size:14.5px;color:#d6dfd8;margin:6px 0}
+
+  .stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+  .stamp{aspect-ratio:1;border-radius:50%;border:2px dashed rgba(217,184,119,.7);display:grid;place-items:center;text-align:center;color:var(--gold);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;position:relative;padding:6px;transform:rotate(-6deg)}
+  .stamp:nth-child(2){transform:rotate(5deg)}.stamp:nth-child(3){transform:rotate(-2deg)}
+  .stamp::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(217,184,119,.4)}
+  .stamp span{font-family:var(--serif);font-size:17px;letter-spacing:0;text-transform:none;display:block;color:var(--cream)}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .tile{background:rgba(246,240,225,.07);border-radius:12px;padding:10px 8px;text-align:center}
+  .tile b{font-family:var(--serif);font-weight:400;font-size:26px;display:block;color:var(--gold);line-height:1.1}
+  .tile small{font-size:11px}
+  .medal{margin-top:10px;font-size:13px;display:flex;align-items:center;gap:8px;color:#d6dfd8}
+
+  .year h4{font-family:var(--serif);font-weight:400;font-size:30px}
+  .bars{display:flex;align-items:flex-end;gap:7px;height:130px;margin:16px 0 6px}
+  .bars i{flex:1;background:linear-gradient(180deg,var(--gold),var(--gold-deep));border-radius:6px 6px 2px 2px;min-height:6px}
+  .bars i.z{background:rgba(246,240,225,.12)}
+  .mo{display:flex;gap:7px;font-size:10.5px;color:#a9bdb2}
+  .mo span{flex:1;text-align:center}
+
+  .replay svg{display:block;width:100%;height:auto;border-radius:16px}
+  .bar{height:6px;border-radius:6px;background:rgba(246,240,225,.15);margin:14px 0 12px;overflow:hidden}
+  .bar i{display:block;height:100%;width:42%;background:var(--gold);border-radius:6px}
+  .ctrl{display:flex;align-items:center;gap:12px}
+  .play{width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--forest);display:grid;place-items:center;font-size:15px}
+  .share{margin-left:auto;font-size:12.5px;border:1px solid rgba(217,184,119,.55);color:var(--gold);padding:8px 14px;border-radius:999px}
+
+  .chap{padding:14px 16px;border-radius:14px;background:rgba(246,240,225,.06);margin-bottom:10px;border-left:4px solid var(--gold)}
+  .chap:nth-child(2){border-left-color:#1f9d7a}.chap:nth-child(3){border-left-color:#e08f7a}
+  .chap b{font-family:var(--serif);font-weight:400;font-size:21px;display:block}
+
   @media (max-width:860px){
     .hero{padding:120px 0 80px}
     .hero .wrap{grid-template-columns:1fr;gap:40px}
-    .grid,.steps,.plans{grid-template-columns:1fr}
+    .steps,.plans{grid-template-columns:1fr}
+    .frow{grid-template-columns:1fr;gap:28px;padding:34px 0}
+    .frow:nth-of-type(even) .ftext{order:0}
+    header.top .links a.l{display:none}
     section{padding:72px 0}
   }
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.pulse{animation:none;opacity:0}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.pulse{animation:none;opacity:0}.scroll-cue svg{animation:none}.js .reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -138,7 +204,7 @@
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#top">Been<i>There</i></a>
-    <a class="nav" href="#join">Join the waitlist</a>
+    <div class="links"><a class="l" href="#features">Features</a><a class="l" href="#plans">Plans</a><a class="nav" href="#join">Join the waitlist</a></div>
   </div>
 </header>
 
@@ -178,6 +244,7 @@
       <p>A lifetime of discoveries.</p>
     </div>
   </div>
+  <a class="scroll-cue" href="#features" aria-label="Scroll down to see what BeenThere can do"><span>See what you can do</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
 </div>
 
 <section id="features">
@@ -185,13 +252,64 @@
     <div class="kicker">What you can do</div>
     <h2>A personal atlas of everywhere life has taken you.</h2>
     <p class="sub">Not just a list of pins. BeenThere keeps the moment, the people and the date, so a place becomes a memory you can revisit.</p>
-    <div class="grid">
-      <div class="feat"><div class="ic">1</div><h3>Your travel map</h3><p>Pin places you have been and the places you dream of going. Keep Been and Bucket List side by side.</p></div>
-      <div class="feat"><div class="ic">2</div><h3>Memories with a story</h3><p>Add the date, who you were with, a few words and your photos. Search them any time.</p></div>
-      <div class="feat"><div class="ic">3</div><h3>Travel Passport</h3><p>Collect passport stamps and adventure awards as your footprint grows across countries, states and cities.</p></div>
-      <div class="feat"><div class="ic">4</div><h3>Your Year in Travel<span class="tag">Premium</span></h3><p>Every year is a chapter. Look back at where life took you.</p></div>
-      <div class="feat"><div class="ic">5</div><h3>Travel Replay<span class="tag">Premium</span></h3><p>Watch your journeys play out in order on the map, and create a shareable video.</p></div>
-      <div class="feat"><div class="ic">6</div><h3>Life Chapters<span class="tag">Premium</span></h3><p>Group places into stories like Family Vacations, College Years or Our Honeymoon.</p></div>
+
+    <div class="frow reveal">
+      <div class="ftext"><div class="num">01</div><h3>Pin everywhere you have been, and everywhere you dream of going.</h3><p>Keep Been and Bucket List side by side on one map. Search a place, tap the map, and it is saved.</p></div>
+      <div class="fvis"><div class="ph" aria-hidden="true">
+        <div class="seg"><span class="on">Been 12</span><span>Bucket List 5</span></div>
+        <div class="prow"><i class="d g"></i><div><b>Lisbon</b><small>Portugal</small></div></div>
+        <div class="prow"><i class="d g"></i><div><b>Charleston</b><small>South Carolina, United States</small></div></div>
+        <div class="prow"><i class="d o"></i><div><b>Kyoto</b><small>Japan &middot; Bucket List</small></div></div>
+        <span class="quick">+ Quick add</span>
+      </div></div>
+    </div>
+
+    <div class="frow reveal">
+      <div class="ftext"><div class="num">02</div><h3>Save the story, not just the spot.</h3><p>Add the date, the people you were with, a few words and your photos. Search your memories any time.</p></div>
+      <div class="fvis"><div class="ph mem" aria-hidden="true">
+        <svg viewBox="0 0 320 170" role="img" aria-label="Illustration of a harbor at sunset"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2f5a"/><stop offset=".55" stop-color="#e08f7a"/><stop offset="1" stop-color="#f3c27c"/></linearGradient></defs><rect width="320" height="170" fill="url(#sk)"/><circle cx="215" cy="104" r="26" fill="#fde7b0"/><path d="M0 118h320v52H0z" fill="#1d4a5a"/><path d="M0 118h320" stroke="#fde7b0" stroke-opacity=".5"/><path d="M175 126h80M190 134h52M200 142h34" stroke="#fde7b0" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/><path d="M40 118l16-30 12 14 14-20 18 36z" fill="#16352e"/><path d="M60 118V96m0 0l14 22" stroke="#f6f0e1" stroke-opacity=".0"/></svg>
+        <div class="dt">June 14, 2026</div>
+        <h4>Sunset on the harbor</h4>
+        <small>Lisbon, Portugal</small>
+        <p>We stayed until the lights came on.</p>
+        <small>With Sam and Alex</small>
+      </div></div>
+    </div>
+
+    <div class="frow reveal">
+      <div class="ftext"><div class="num">03</div><h3>A passport that fills itself.</h3><p>Stamps, adventure awards, state flags and travel stats build up as you add places.</p></div>
+      <div class="fvis"><div class="ph" aria-hidden="true">
+        <div class="stamps"><div class="stamp"><span>Italy</span>2024</div><div class="stamp"><span>Japan</span>2025</div><div class="stamp"><span>Peru</span>2026</div></div>
+        <div class="tiles"><div class="tile"><b>12</b><small>Places</small></div><div class="tile"><b>5</b><small>Countries</small></div><div class="tile"><b>9</b><small>Cities</small></div></div>
+        <div class="medal">&#127942; Adventure Awards &middot; new medal unlocked</div>
+      </div></div>
+    </div>
+
+    <div class="frow reveal">
+      <div class="ftext"><div class="num">04</div><h3>Your Year in Travel <span class="tag">Premium</span></h3><p>Every year is a chapter. Look back at where life took you and when.</p></div>
+      <div class="fvis"><div class="ph year" aria-hidden="true">
+        <h4>2026</h4><small>7 places &middot; 3 countries</small>
+        <div class="bars"><i class="z" style="height:6%"></i><i style="height:38%"></i><i style="height:62%"></i><i class="z" style="height:6%"></i><i style="height:30%"></i><i style="height:100%"></i><i style="height:46%"></i><i class="z" style="height:6%"></i><i style="height:70%"></i><i class="z" style="height:6%"></i><i style="height:24%"></i><i class="z" style="height:6%"></i></div>
+        <div class="mo"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
+      </div></div>
+    </div>
+
+    <div class="frow reveal">
+      <div class="ftext"><div class="num">05</div><h3>Travel Replay <span class="tag">Premium</span></h3><p>Watch your journeys play out in order on the map, then turn them into a video you can share.</p></div>
+      <div class="fvis"><div class="ph replay" aria-hidden="true">
+        <svg viewBox="0 0 320 150" role="img" aria-label="Map with a dotted route connecting three stops"><rect width="320" height="150" fill="#123629"/><g fill="#2c5a49"><path d="M18 40c18-14 52-18 70-6s10 34-8 42-50 6-62-10 0-18 0-26z"/><path d="M118 70c22-16 58-20 84-6s22 38 0 50-62 8-82-8-4-26-2-36z"/><path d="M226 32c20-10 56-6 72 12s-4 40-30 42-52-10-52-30 2-16 10-24z"/></g><path d="M62 62C100 30 150 96 196 84S250 40 262 58" fill="none" stroke="#d9b877" stroke-width="2.4" stroke-dasharray="2 7" stroke-linecap="round"/><g fill="#1f9d7a" stroke="#f6f0e1" stroke-width="2"><circle cx="62" cy="62" r="7"/><circle cx="196" cy="84" r="7"/></g><circle cx="262" cy="58" r="9" fill="#d9b877" stroke="#f6f0e1" stroke-width="2"/></svg>
+        <div class="bar"><i></i></div>
+        <div class="ctrl"><span class="play">&#9654;</span><small>2 / 5 &middot; Ready to explore</small><span class="share">Shareable video</span></div>
+      </div></div>
+    </div>
+
+    <div class="frow reveal">
+      <div class="ftext"><div class="num">06</div><h3>Life Chapters <span class="tag">Premium</span></h3><p>Group places into stories like Family Vacations, College Years or Our Honeymoon. A place can belong to more than one chapter.</p></div>
+      <div class="fvis"><div class="ph" aria-hidden="true">
+        <div class="chap"><b>Family Vacations</b><small>6 places</small></div>
+        <div class="chap"><b>College Years</b><small>4 places</small></div>
+        <div class="chap"><b>Our Honeymoon</b><small>3 places</small></div>
+      </div></div>
     </div>
   </div>
 </section>
@@ -302,6 +420,16 @@
       }).then(function(){ btn.disabled = false; });
     });
   });
+})();
+
+(function(){
+  var els=document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.15});
+    els.forEach(function(el){io.observe(el);});
+  } else { els.forEach(function(el){el.classList.add("in");}); }
+  var cue=document.querySelector(".scroll-cue");
+  if(cue){var onS=function(){cue.classList.toggle("gone",window.scrollY>60);};window.addEventListener("scroll",onS,{passive:true});onS();}
 })();
 </script>
 </body>
